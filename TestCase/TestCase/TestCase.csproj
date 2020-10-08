@@ -39,10 +39,8 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Entities\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Models\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
