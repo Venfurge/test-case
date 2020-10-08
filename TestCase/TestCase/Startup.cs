@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +27,15 @@ namespace TestCase
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            //Connecting Database
+            //Connection string is located ad appsettings.json
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseSqlServer(connectionString).EnableDetailedErrors());
+
+            //Connecting services
+            AddServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +61,10 @@ namespace TestCase
 
             app.UseRouting();
 
+            //Adding Authentication and Authorization
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -70,6 +84,11 @@ namespace TestCase
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
+
+        public void AddServices(IServiceCollection services)
+        { 
+        
         }
     }
 }
