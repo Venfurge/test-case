@@ -9,8 +9,8 @@ using TestCase;
 namespace TestCase.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20201008161105_TransactionsTable")]
-    partial class TransactionsTable
+    [Migration("20201009163031_InitMigration")]
+    partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,9 +23,7 @@ namespace TestCase.Migrations
             modelBuilder.Entity("TestCase.Entities.TransactionEntity", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("money");

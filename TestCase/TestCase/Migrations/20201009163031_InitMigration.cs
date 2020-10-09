@@ -2,7 +2,7 @@
 
 namespace TestCase.Migrations
 {
-    public partial class TransactionsTable : Migration
+    public partial class InitMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,8 +10,7 @@ namespace TestCase.Migrations
                 name: "Transactions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(nullable: false),
                     Status = table.Column<int>(nullable: false),
                     Type = table.Column<int>(nullable: false),
                     ClientName = table.Column<string>(nullable: true),

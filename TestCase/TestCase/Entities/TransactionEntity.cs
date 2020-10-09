@@ -1,4 +1,5 @@
-﻿using static TestCase.Entities.Enums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using static TestCase.Entities.Enums;
 
 namespace TestCase.Entities
 {

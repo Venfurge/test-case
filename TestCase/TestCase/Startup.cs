@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using TestCase.Interfaces;
+using TestCase.Services;
 
 namespace TestCase
 {
@@ -139,8 +141,8 @@ namespace TestCase
         }
 
         public void AddServices(IServiceCollection services)
-        { 
-        
+        {
+            services.AddTransient<ITransactionService, TransactionService>();
         }
     }
 }

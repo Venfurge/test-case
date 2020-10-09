@@ -17,6 +17,10 @@ namespace TestCase
             modelBuilder.Entity<TransactionEntity>()
                 .Property(i => i.Amount)
                 .HasColumnType("money");
+
+            modelBuilder.Entity<TransactionEntity>()
+                .Property(i => i.Id)
+                .ValueGeneratedNever();
         }
     }
 }

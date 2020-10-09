@@ -21,9 +21,7 @@ namespace TestCase.Migrations
             modelBuilder.Entity("TestCase.Entities.TransactionEntity", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("money");
