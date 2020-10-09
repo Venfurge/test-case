@@ -37,6 +37,32 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\helpers\api-decorator.ts" />
+    <None Remove="ClientApp\src\app\models\api-response.model.ts" />
+    <None Remove="ClientApp\src\app\models\model-response.model.ts" />
+    <None Remove="ClientApp\src\app\models\paging-list.model.ts" />
+    <None Remove="ClientApp\src\app\models\transaction\add-transaction-request.model.ts" />
+    <None Remove="ClientApp\src\app\models\transaction\transaction-file-request.model.ts" />
+    <None Remove="ClientApp\src\app\models\transaction\transaction.model.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\main\content\services\" />
+    <Folder Include="ClientApp\src\app\shared\" />
+    <Folder Include="ClientApp\src\app\services\api\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\helpers\api-decorator.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\api-response.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\model-response.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\paging-list.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\transaction\add-transaction-request.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\transaction\transaction-file-request.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\transaction\transaction.model.ts" />
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
