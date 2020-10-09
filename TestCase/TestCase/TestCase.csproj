@@ -49,7 +49,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\main\content\services\" />
-    <Folder Include="ClientApp\src\app\shared\" />
     <Folder Include="ClientApp\src\app\services\api\" />
   </ItemGroup>
 

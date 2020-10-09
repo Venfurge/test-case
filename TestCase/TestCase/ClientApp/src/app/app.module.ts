@@ -7,6 +7,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogModule } from './shared/dialog.module';
+import { DialogService } from './services/dialog.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const routes: Routes = [
   {
@@ -27,8 +30,12 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
 
+    MatSnackBarModule,
+    DialogModule,
   ],
-  providers: [],
+  providers: [
+    DialogService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
