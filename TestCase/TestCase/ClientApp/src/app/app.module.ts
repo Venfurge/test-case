@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule } from './shared/dialog.module';
 import { DialogService } from './services/dialog.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { APITransactionService } from './services/api/api-transaction.service';
 
 const routes: Routes = [
   {
@@ -35,6 +36,8 @@ const routes: Routes = [
   ],
   providers: [
     DialogService,
+
+    APITransactionService,
   ],
   bootstrap: [AppComponent]
 })

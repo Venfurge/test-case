@@ -1,4 +1,4 @@
-export class Transaction {
+export class TransactionModel {
   public id: number;
   public status: number;
   public type: number;
