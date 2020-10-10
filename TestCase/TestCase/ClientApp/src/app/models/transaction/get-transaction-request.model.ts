@@ -1,6 +1,6 @@
 export class GetTransactionRequest {
   pn: number = 0;
-  ps: number = 0;
+  ps: number = 10;
   sort: string = "id";
   sortDir: string = "asc";
   status: number = null;

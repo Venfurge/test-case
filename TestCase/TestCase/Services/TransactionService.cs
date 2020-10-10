@@ -36,7 +36,7 @@ namespace TestCase.Services
 
         #region ITransactionService implementation
 
-        public async Task<PagingList<TransactionModel>> GetTransactions(int pn = 0, int ps = 0, string sort = "id", string sortDir = "asc", Status? status = null, Type? type = null)
+        public async Task<PagingList<TransactionModel>> GetTransactions(int pn = 0, int ps = 10, string sort = "id", string sortDir = "asc", Status? status = null, Type? type = null)
         {
             //Create response
             var response = new PagingList<TransactionModel>();
@@ -187,10 +187,14 @@ namespace TestCase.Services
             {
                 ("id", "desc") => query.OrderByDescending(v => v.Id),
                 ("id", _) => query.OrderBy(v => v.Id),
+                ("status", "desc") => query.OrderByDescending(v => v.Status),
+                ("status", "asc") => query.OrderBy(v => v.Status),
+                ("type", "desc") => query.OrderByDescending(v => v.Type),
+                ("type", "asc") => query.OrderBy(v => v.Type),
                 ("clientName", "desc") => query.OrderByDescending(v => v.ClientName),
-                ("clientName", _) => query.OrderBy(v => v.ClientName),
+                ("clientName", "asc") => query.OrderBy(v => v.ClientName),
                 ("amount", "desc") => query.OrderByDescending(v => v.Amount),
-                ("amount", _) => query.OrderBy(v => v.Amount),
+                ("amount", "asc") => query.OrderBy(v => v.Amount),
                 _ => query.OrderBy(v => v.Id)
             };
 

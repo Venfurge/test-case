@@ -50,10 +50,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\main\content\services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\helpers\api-decorator.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\api-response.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\id-model-request.model.ts" />

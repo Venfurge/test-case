@@ -1,5 +1,9 @@
-<div>
-  <div>Main Page</div>
-  <app-transaction-search></app-transaction-search>
-  <app-transaction-list></app-transaction-list>
+<div fxLayout="row" fxLayoutAlign="space-between stretch" class="full-height page-paddings">
+  <div>Sidebar</div>
+  <div class="overflowAuto" fxLayout="column" fxLayoutAlign="start stretch" fxFlex>
+    <app-transaction-search></app-transaction-search>
+
+    <app-transaction-list fxFlex></app-transaction-list>
+
+  </div>
 </div>

@@ -1,0 +1,38 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+  <mat-toolbar color="primary" class="navigation-text-color">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+      <div>Change status</div>
+      <button mat-icon-button (click)="close()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="dialog-content-container" fxLayout="column" fxLayoutAlign="start stretch">
+
+    <form fxLayout="column" fxLayoutAlign="start stretch"
+          [formGroup]="form">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status"
+                    placeholder="Виберіть наявність">
+          <mat-option [value]="0">Pending</mat-option>
+          <mat-option [value]="1">Completed</mat-option>
+          <mat-option [value]="2">Cancelled</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.status.hasError('required')">Pick status</mat-error>
+      </mat-form-field>
+
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+
+        <button mat-raised-button color="primary" class="navigation-text-color"
+                (click)="save()">
+          Save
+        </button>
+
+      </div>
+    </form>
+  </div>
+</div>
+

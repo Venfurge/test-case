@@ -24,12 +24,12 @@ export class APITransactionService {
   public async getTransactions(request: GetTransactionRequest): Promise<ModelResponse<PagingList<TransactionModel>>> {
 
     let params = new HttpParams();
-    if (request.pn != null) params = params.set("pn", request.pn.toString());
-    if (request.ps != null) params = params.set("ps", request.ps.toString());
-    if (request.sort != null) params = params.set("sort", request.sort);
-    if (request.sortDir != null) params = params.set("sortDir", request.sortDir);
-    if (request.status != null) params = params.set("status", request.status.toString());
-    if (request.type != null) params = params.set("type", request.type.toString());
+    if (request.pn != null)       params = params.set("pn", request.pn.toString());
+    if (request.ps != null)       params = params.set("ps", request.ps.toString());
+    if (request.sort != null)     params = params.set("sort", request.sort);
+    if (request.sortDir != null)  params = params.set("sortDir", request.sortDir);
+    if (request.status != null)   params = params.set("status", request.status.toString());
+    if (request.type != null)     params = params.set("type", request.type.toString());
 
     let response = new ModelResponse<PagingList<TransactionModel>>();
     response.model = await this._httpClient.get<PagingList<TransactionModel>>('api/transaction', { params: params }).toPromise();

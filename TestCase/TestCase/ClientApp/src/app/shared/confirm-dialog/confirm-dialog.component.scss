@@ -1,7 +1,15 @@
 @import 'src/app.theme.scss';
 
 .dialog {
-  width: 400px;
+  width: 300px;
+
+  .dialog-content-container {
+    padding: 12px;
+
+    .text-container {
+      padding-bottom: 12px;
+    }
+  }
 
   .accept-button {
 

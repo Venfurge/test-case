@@ -1,7 +1,8 @@
 @import 'src/app.theme.scss';
 
 .dialog {
-  width: 400px;
+  width: 300px;
+  padding-bottom: 8px;
 
   @include media-breakpoint('xs') {
     width: 65vw;
