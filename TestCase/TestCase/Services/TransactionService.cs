@@ -85,13 +85,15 @@ namespace TestCase.Services
             return response;
         }
 
-        public async Task AddTransactions(IFormFile file)
+        public async Task AddTransactions(TransactionsFileRequest file)
         {
-            string type = file.ContentType;
-
             //Check if file null
             if (file == null)
-                throw new BadRequestException("File");
+                throw new BadRequestException("File equals null");
+
+            //Check if file has correct format
+            if (file.File.ContentType != "application/vnd.ms-excel")
+                throw new BadRequestException("Wrong file type");
 
             //Result list
             var result = new List<TransactionEntity>();
@@ -100,7 +102,7 @@ namespace TestCase.Services
             List<string> stringList = new List<string>();
 
             //Reading string list
-            using (var reader = new StreamReader(file.OpenReadStream()))
+            using (var reader = new StreamReader(file.File.OpenReadStream()))
             {
                 while (reader.Peek() >= 0)
                     stringList.Add(await reader.ReadLineAsync());

@@ -25,7 +25,7 @@ namespace TestCase.Interfaces
         /// Add Transactions
         /// </summary>
         /// <param name="file">Csv file with transactions</param>
-        Task AddTransactions(IFormFile file);
+        Task AddTransactions(TransactionsFileRequest file);
 
         /// <summary>
         /// Edit Transaction

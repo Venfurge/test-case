@@ -3,6 +3,9 @@ import { TransactionService } from '../../services/transaction.service';
 import { GetTransactionRequest } from '../../../../models/transaction/get-transaction-request.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from "rxjs/operators";
+import { IdModelRequest } from '../../../../models/id-model-request.model';
+import { DialogService } from '../../../../services/dialog.service';
+import { TransactionFileRequest } from '../../../../models/transaction/transaction-file-request.model';
 
 @Component({
   selector: 'app-transaction-menu',
@@ -15,9 +18,11 @@ export class TransactionMenuComponent implements OnInit, OnDestroy {
 
   request: GetTransactionRequest;
 
+  private selectedFile: File;
   private _unsubscribe: Subject<any>;
 
   constructor(
+    private _dialogService: DialogService,
     private _transactionService: TransactionService,
   ) {
     this._unsubscribe = new Subject<any>();
@@ -44,5 +49,22 @@ export class TransactionMenuComponent implements OnInit, OnDestroy {
   onTypeChanged(type: number): void {
     this.request.type = type;
     this._transactionService.onGetTransactions.next(this.request);
+  }
+
+  onFileSelect(event) {
+    this.selectedFile = event.target.files[0];
+
+    //Checking if file has correct type
+    if (this.selectedFile.type != "application/vnd.ms-excel") {
+      this._dialogService.showAlertDialog("File must have type .csv");
+      return;
+    }
+
+    //Creating file and sending request
+    let file = new FormData();
+    file.append('file', this.selectedFile);
+
+    let request = new TransactionFileRequest<FormData>({ file: file });
+    this._transactionService.onAddTransactions.next(request);
   }
 }

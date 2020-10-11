@@ -7,12 +7,14 @@ import { PagingList } from '../../../models/paging-list.model';
 import { TransactionModel } from '../../../models/transaction/transaction.model';
 import { AddTransactionRequest } from '../../../models/transaction/add-transaction-request.model';
 import { IdModelRequest } from '../../../models/id-model-request.model';
+import { TransactionFileRequest } from '../../../models/transaction/transaction-file-request.model';
 
 @Injectable()
 export class TransactionService {
 
   onEditTransaction: Subject<IdModelRequest<AddTransactionRequest>>;
   onDeleteTransaction: Subject<number>;
+  onAddTransactions: Subject<TransactionFileRequest<FormData>>;
   onGetTransactions: Subject<GetTransactionRequest>;
 
   onTransactionsChanged: BehaviorSubject<PagingList<TransactionModel>>;
@@ -29,6 +31,7 @@ export class TransactionService {
 
     this.onEditTransaction = new Subject();
     this.onDeleteTransaction = new Subject();
+    this.onAddTransactions = new Subject();
     this.onGetTransactions = new Subject();
 
     this.onTransactionsChanged = new BehaviorSubject(new PagingList<TransactionModel>());
@@ -37,6 +40,7 @@ export class TransactionService {
 
     this.onEditTransaction.subscribe(request => this.editTransaction(request));
     this.onDeleteTransaction.subscribe(request => this.deleteTransaction(request));
+    this.onAddTransactions.subscribe(request => this.addTransactions(request));
 
     this.onGetTransactions.subscribe(request => {
       if (request != null) {
@@ -80,6 +84,16 @@ export class TransactionService {
     }
   }
 
+  private async addTransactions(request: TransactionFileRequest<FormData>): Promise<void> {
+    let response = await this._apiService.addTransactions(request);
+
+    if (response.success) {
+      this.onGetTransactions.next(null);
+      this._dialogService.showSnackBar("Successfully added!");
+      return;
+    }
+  }
+
   private async getTransactions(): Promise<void> {
     this.onTransactionssLoadingChanged.next(true);
     let response = await this._apiService.getTransactions(this.request);
@@ -90,5 +104,4 @@ export class TransactionService {
       return;
     }
   }
-
 }

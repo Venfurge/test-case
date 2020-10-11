@@ -21,7 +21,8 @@
   </div>
 
   <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start stretch" fxLayoutGap="16px" fxLayoutGap.xs="12px">
-    <button mat-raised-button class="menu-button">Import</button>
+    <input class="file-input" type="file" (change)="onFileSelect($event)" #hiddenfileinput>
+    <button mat-raised-button class="menu-button" (click)="hiddenfileinput.click()">Import</button>
     <button mat-raised-button class="menu-button">Export</button>
   </div>
 </div>

@@ -38,11 +38,11 @@ export class APITransactionService {
   }
 
   // <response code="200">Transactions added</response>
-  // <response code="400">File is empty or bad</response>
+  // <response code="400">Bad File</response>
   @API<ApiResponse>()
   public async addTransactions(request: TransactionFileRequest<FormData>): Promise<ApiResponse> {
     let response = new ApiResponse();
-    await this._httpClient.post('api/transaction', request).toPromise();
+    await this._httpClient.post('api/transaction', request.file).toPromise();
     return response;
   }
 

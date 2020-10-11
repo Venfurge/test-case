@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestCase.Interfaces;
 using TestCase.Models;
@@ -63,16 +64,16 @@ namespace TestCase.Controllers
         /// <summary>
         /// Add Transactions
         /// </summary>
-        /// <param name="request">File</param>
+        /// <param name="file">File</param>
         /// <response code="200">Transactions added</response>
-        /// <response code="400">File is empty or bad</response>
+        /// <response code="400">Bad File</response>
         [HttpPost]
         [Route("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> AddTransactions([FromForm] TransactionsFileRequest request)
+        public async Task<ActionResult> AddTransactions([FromForm] TransactionsFileRequest file)
         {
-            return await ExecuteWithOkResponse(async () => await _transactionService.AddTransactions(request.File));
+            return await ExecuteWithOkResponse(async () => await _transactionService.AddTransactions(file));
         }
 
 
