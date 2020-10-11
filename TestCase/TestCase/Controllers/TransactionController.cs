@@ -39,6 +39,7 @@ namespace TestCase.Controllers
         /// <param name="ps">Page size</param>
         /// <param name="sort">Sort by column (id, name)</param>
         /// <param name="sortDir">Sort direction (asc, desc)</param>
+        /// <param name="find">Search string</param>
         /// <param name="status">Filter by status</param>
         /// <param name="type">Filter by type</param>
         /// <response code="200">Transaction list</response>
@@ -51,11 +52,12 @@ namespace TestCase.Controllers
             [FromQuery] int ps          = 10,
             [FromQuery] string sort     = "id",
             [FromQuery] string sortDir  = "asc",
+            [FromQuery] string find     = null,
             [FromQuery] Status? status  = null,
             [FromQuery] Type? type      = null
         )
         {
-            return await ExecuteWithOkResponse(async () => await _transactionService.GetTransactions(pn, ps, sort, sortDir, status, type));
+            return await ExecuteWithOkResponse(async () => await _transactionService.GetTransactions(pn, ps, sort, sortDir, find, status, type));
         }
 
         /// <summary>

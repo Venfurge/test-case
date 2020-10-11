@@ -36,7 +36,7 @@ namespace TestCase.Services
 
         #region ITransactionService implementation
 
-        public async Task<PagingList<TransactionModel>> GetTransactions(int pn = 0, int ps = 10, string sort = "id", string sortDir = "asc", Status? status = null, Type? type = null)
+        public async Task<PagingList<TransactionModel>> GetTransactions(int pn = 0, int ps = 10, string sort = "id", string sortDir = "asc", string find = null, Status? status = null, Type? type = null)
         {
             //Create response
             var response = new PagingList<TransactionModel>();
@@ -52,6 +52,14 @@ namespace TestCase.Services
             //Filter by type
             if (type != null)
                 query = query.Where(v => v.Type == type);
+
+            //Filter by search
+            if (!string.IsNullOrEmpty(find))
+                query = query.Where(v =>
+                    EF.Functions.Like(v.ClientName, $"%{find}%") ||
+                    EF.Functions.Like(v.Amount.ToString(), $"%{find}%") ||
+                    EF.Functions.Like(v.Id.ToString(), $"%{find}%")
+                );
 
             //Order query
             query = OrderTransactions(query, sort, sortDir);

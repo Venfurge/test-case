@@ -3,6 +3,7 @@ export class GetTransactionRequest {
   ps: number = 10;
   sort: string = "id";
   sortDir: string = "asc";
+  find: string = null;
   status: number = null;
   type: number = null;
 

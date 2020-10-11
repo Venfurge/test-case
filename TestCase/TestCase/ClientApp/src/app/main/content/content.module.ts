@@ -22,6 +22,7 @@ import { TransactionService } from './services/transaction.service';
 import { ChangeTransactionStatusComponent } from './main-page/transaction-list/change-transaction-status/change-transaction-status.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidebarComponent } from './main-page/sidebar/sidebar.component';
+import { TransactionMenuComponent } from './main-page/transaction-menu/transaction-menu.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,7 @@ const routes: Routes = [
     TransactionSearchComponent,
     TransactionListComponent,
     ChangeTransactionStatusComponent,
+    TransactionMenuComponent,
     SidebarComponent,
   ],
   entryComponents: [
@@ -47,6 +49,7 @@ const routes: Routes = [
     TransactionSearchComponent,
     TransactionListComponent,
     ChangeTransactionStatusComponent,
+    TransactionMenuComponent,
     SidebarComponent,
   ],
   imports: [

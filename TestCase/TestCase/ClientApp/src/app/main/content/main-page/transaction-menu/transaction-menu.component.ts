@@ -1,25 +1,24 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { TransactionService } from '../../services/transaction.service';
 import { GetTransactionRequest } from '../../../../models/transaction/get-transaction-request.model';
 import { Subject } from 'rxjs';
-import { TransactionService } from '../../services/transaction.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { takeUntil } from "rxjs/operators";
 
 @Component({
-  selector: 'app-transaction-search',
-  templateUrl: './transaction-search.component.html',
-  styleUrls: ['./transaction-search.component.scss']
+  selector: 'app-transaction-menu',
+  templateUrl: './transaction-menu.component.html',
+  styleUrls: ['./transaction-menu.component.scss']
 })
-export class TransactionSearchComponent implements OnInit, OnDestroy {
+export class TransactionMenuComponent implements OnInit, OnDestroy {
+  selectedStatus: number = null;
+  selectedType: number = null;
 
-  form: FormGroup;
   request: GetTransactionRequest;
 
   private _unsubscribe: Subject<any>;
 
   constructor(
     private _transactionService: TransactionService,
-    private _builder: FormBuilder,
   ) {
     this._unsubscribe = new Subject<any>();
   }
@@ -30,8 +29,6 @@ export class TransactionSearchComponent implements OnInit, OnDestroy {
       .subscribe(request => {
         this.request = request;
       });
-
-    this.form = this.createForm();
   }
 
   ngOnDestroy(): void {
@@ -39,18 +36,13 @@ export class TransactionSearchComponent implements OnInit, OnDestroy {
     this._unsubscribe.complete();
   }
 
-  createForm(): FormGroup {
-    let form = this._builder.group({
-      find: [this.request.find || ''],
-    });
-
-    return form;
+  onStatusChanged(status: number): void {
+    this.request.status = status;
+    this._transactionService.onGetTransactions.next(this.request);
   }
 
-  search() {
-    this.request.find = this.form.value.find;
-
-    this.request.pn = 0;
+  onTypeChanged(type: number): void {
+    this.request.type = type;
     this._transactionService.onGetTransactions.next(this.request);
   }
 }

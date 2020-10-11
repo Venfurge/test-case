@@ -1,1 +1,18 @@
-<div>Transaction Search</div>
+<div fxLayout="column" fxLayoutAlign="start stretch">
+  <form [formGroup]="form" (ngSubmit)="search()">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="8px">
+      <mat-form-field color="accent" appearance="outline" fxFlex>
+        <mat-label>Search</mat-label>
+        <input matInput
+               placeholder="Search"
+               formControlName="find">
+        <button mat-icon-button
+                type="submit"
+                tabindex="-1"
+                matPrefix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </form>
+</div>

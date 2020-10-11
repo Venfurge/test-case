@@ -56,11 +56,3 @@ $breakpoints: ( xs: 'screen and (max-width: 599px)', sm: 'screen and (min-width:
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.full-height {
-  height: calc(100vh - 64px) !important;
-
-  @include media-breakpoint('xs') {
-    height: calc(100vh - 56px) !important;
-  }
-}

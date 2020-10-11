@@ -15,10 +15,11 @@ namespace TestCase.Interfaces
         /// <param name="ps">Page size</param>
         /// <param name="sort">Sort column</param>
         /// <param name="sortDir">Sort direction</param>
+        /// <param name="find">Search string</param>
         /// <param name="status">Filter by status</param>
         /// <param name="type">Filter by type</param>
         /// <returns><see cref="TransactionModel"/></returns>
-        Task<PagingList<TransactionModel>> GetTransactions(int pn = 0, int ps = 0, string sort = "id", string sortDir="asc", Status? status=null, Type? type=null);
+        Task<PagingList<TransactionModel>> GetTransactions(int pn = 0, int ps = 0, string sort = "id", string sortDir="asc", string find = null, Status? status=null, Type? type=null);
 
         /// <summary>
         /// Add Transactions

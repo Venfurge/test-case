@@ -7,4 +7,13 @@
 .page-paddings {
   padding-left: 12px;
   padding-right: 12px;
+  padding-top: 12px;
+}
+
+.full-height {
+  height: calc(100vh - 112px) !important;
+
+  @include media-breakpoint('xs') {
+    height: calc(100vh - 12px) !important;
+  }
 }

@@ -6,10 +6,19 @@
   min-height: 300px;
   min-width: 200px;
 
+  @include media-breakpoint('lt-md') {
+    min-width: 100%;
+    min-height: 32px;
+  }
+
   ul {
     list-style: none;
-    margin: 0;
+    margin: 0px;
     padding: 0px;
+
+    @include media-breakpoint('lt-md') {
+      display: inline;
+    }
   }
 
   .link {

@@ -28,6 +28,7 @@ export class APITransactionService {
     if (request.ps != null)       params = params.set("ps", request.ps.toString());
     if (request.sort != null)     params = params.set("sort", request.sort);
     if (request.sortDir != null)  params = params.set("sortDir", request.sortDir);
+    if (request.find != null)     params = params.set("find", request.find);
     if (request.status != null)   params = params.set("status", request.status.toString());
     if (request.type != null)     params = params.set("type", request.type.toString());
 

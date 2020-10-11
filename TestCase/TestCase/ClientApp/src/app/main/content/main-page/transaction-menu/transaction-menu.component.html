@@ -1,0 +1,27 @@
+<div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayout.lt-md="column" fxLayoutAlign.lt-md="start stretch" fxLayoutGap="12px">
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxLayoutGap="16px" fxLayoutGap.lt-md="0px">
+    <mat-form-field color="accent" appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select [ngModel]="selectedStatus" (ngModelChange)="onStatusChanged($event)">
+        <mat-option [value]="null">--</mat-option>
+        <mat-option [value]="0">Pending</mat-option>
+        <mat-option [value]="1">Completed</mat-option>
+        <mat-option [value]="2">Cancelled</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field color="accent" appearance="fill">
+      <mat-label>Type</mat-label>
+      <mat-select [ngModel]="selectedType" (ngModelChange)="onTypeChanged($event)">
+        <mat-option [value]="null">--</mat-option>
+        <mat-option [value]="0">Refill</mat-option>
+        <mat-option [value]="1">Withdrawal</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start stretch" fxLayoutGap="16px" fxLayoutGap.xs="12px">
+    <button mat-raised-button class="menu-button">Import</button>
+    <button mat-raised-button class="menu-button">Export</button>
+  </div>
+</div>

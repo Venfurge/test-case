@@ -1,0 +1,10 @@
+@import 'src/app.theme.scss';
+
+.menu-button {
+  height: 40px !important;
+  width: 120px !important;
+
+  @include media-breakpoint('xs') {
+    width: 100% !important;
+  }
+}
