@@ -23,6 +23,6 @@
   <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start stretch" fxLayoutGap="16px" fxLayoutGap.xs="12px">
     <input class="file-input" type="file" (change)="onFileSelect($event)" #hiddenfileinput>
     <button mat-raised-button class="menu-button" (click)="hiddenfileinput.click()">Import</button>
-    <button mat-raised-button class="menu-button">Export</button>
+    <button mat-raised-button class="menu-button" (click)="getTransactionsExcel()">Export</button>
   </div>
 </div>

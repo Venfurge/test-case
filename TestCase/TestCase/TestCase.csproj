@@ -18,6 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.95.3" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
@@ -44,6 +45,7 @@
     <None Remove="ClientApp\src\app\models\model-response.model.ts" />
     <None Remove="ClientApp\src\app\models\paging-list.model.ts" />
     <None Remove="ClientApp\src\app\models\transaction\add-transaction-request.model.ts" />
+    <None Remove="ClientApp\src\app\models\transaction\get-transaction-excel-request.model.ts" />
     <None Remove="ClientApp\src\app\models\transaction\get-transaction-request.model.ts" />
     <None Remove="ClientApp\src\app\models\transaction\transaction-file-request.model.ts" />
     <None Remove="ClientApp\src\app\models\transaction\transaction.model.ts" />
@@ -56,6 +58,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\model-response.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\paging-list.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\transaction\add-transaction-request.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\transaction\get-transaction-excel-request.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\transaction\get-transaction-request.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\transaction\transaction-file-request.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\transaction\transaction.model.ts" />

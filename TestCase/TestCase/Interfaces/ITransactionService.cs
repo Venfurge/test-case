@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TestCase.Models;
 using TestCase.Models.Transaction;
@@ -20,6 +21,13 @@ namespace TestCase.Interfaces
         /// <param name="type">Filter by type</param>
         /// <returns><see cref="TransactionModel"/></returns>
         Task<PagingList<TransactionModel>> GetTransactions(int pn = 0, int ps = 0, string sort = "id", string sortDir="asc", string find = null, Status? status=null, Type? type=null);
+
+        /// <summary>
+        /// Get Transactions Excel bytes
+        /// </summary>
+        /// <param name="status">Filter by status</param>
+        /// <param name="type">Filter by type</param>
+        FileContentResult GetTransactionsExcel(Status? status = null, Type? type = null);
 
         /// <summary>
         /// Add Transactions

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using TestCase.Interfaces;
 using TestCase.Models;
@@ -49,16 +51,32 @@ namespace TestCase.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<PagingList<TransactionModel>>> GetTransactions
         (
-            [FromQuery] int pn          = 0,
-            [FromQuery] int ps          = 10,
-            [FromQuery] string sort     = "id",
-            [FromQuery] string sortDir  = "asc",
-            [FromQuery] string find     = null,
-            [FromQuery] Status? status  = null,
-            [FromQuery] Type? type      = null
+            [FromQuery] int pn = 0,
+            [FromQuery] int ps = 10,
+            [FromQuery] string sort = "id",
+            [FromQuery] string sortDir = "asc",
+            [FromQuery] string find = null,
+            [FromQuery] Status? status = null,
+            [FromQuery] Type? type = null
         )
         {
             return await ExecuteWithOkResponse(async () => await _transactionService.GetTransactions(pn, ps, sort, sortDir, find, status, type));
+        }
+
+        /// <summary>
+        /// Get Transactions in Excel file
+        /// </summary>
+        /// <param name="status">Filter by status</param>
+        /// <param name="type">Filter by type</param>
+        [HttpGet]
+        [Route("excel")]
+        public IActionResult GetTransactionsExcel
+        (
+            [FromQuery] Status? status = null,
+            [FromQuery] Type? type = null
+        )
+        {
+            return this._transactionService.GetTransactionsExcel(status, type);          
         }
 
         /// <summary>

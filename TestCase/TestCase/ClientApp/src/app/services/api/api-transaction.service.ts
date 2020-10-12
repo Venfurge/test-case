@@ -9,6 +9,7 @@ import { IdModelRequest } from '../../models/id-model-request.model';
 import { AddTransactionRequest } from '../../models/transaction/add-transaction-request.model';
 import { ApiResponse } from '../../models/api-response.model';
 import { TransactionFileRequest } from '../../models/transaction/transaction-file-request.model';
+import { GetTransactionExcelRequest } from '../../models/transaction/get-transaction-excel-request.model';
 
 @Injectable()
 export class APITransactionService {
@@ -34,6 +35,16 @@ export class APITransactionService {
 
     let response = new ModelResponse<PagingList<TransactionModel>>();
     response.model = await this._httpClient.get<PagingList<TransactionModel>>('api/transaction', { params: params }).toPromise();
+    return response;
+  }
+    
+  public async getTransactionsExcel(request: GetTransactionExcelRequest): Promise<Blob> {
+
+    let params = new HttpParams();
+    if (request.status != null)   params = params.set("status", request.status.toString());
+    if (request.type != null) params = params.set("type", request.type.toString());
+
+    let response = await this._httpClient.get('api/transaction/excel', { params: params, responseType: 'blob' }).toPromise();
     return response;
   }
 

@@ -8,6 +8,7 @@ import { TransactionModel } from '../../../models/transaction/transaction.model'
 import { AddTransactionRequest } from '../../../models/transaction/add-transaction-request.model';
 import { IdModelRequest } from '../../../models/id-model-request.model';
 import { TransactionFileRequest } from '../../../models/transaction/transaction-file-request.model';
+import { GetTransactionExcelRequest } from '../../../models/transaction/get-transaction-excel-request.model';
 
 @Injectable()
 export class TransactionService {
@@ -16,10 +17,12 @@ export class TransactionService {
   onDeleteTransaction: Subject<number>;
   onAddTransactions: Subject<TransactionFileRequest<FormData>>;
   onGetTransactions: Subject<GetTransactionRequest>;
+  onGetTransactionsExcel: Subject<GetTransactionExcelRequest>;
 
   onTransactionsChanged: BehaviorSubject<PagingList<TransactionModel>>;
   onGetTransactionsChanged: BehaviorSubject<GetTransactionRequest>;
   onTransactionssLoadingChanged: BehaviorSubject<boolean>;
+  onTransactionsExcelFileChanged: BehaviorSubject<Blob>;
 
   request: GetTransactionRequest;
 
@@ -33,14 +36,17 @@ export class TransactionService {
     this.onDeleteTransaction = new Subject();
     this.onAddTransactions = new Subject();
     this.onGetTransactions = new Subject();
+    this.onGetTransactionsExcel = new Subject();
 
     this.onTransactionsChanged = new BehaviorSubject(new PagingList<TransactionModel>());
     this.onGetTransactionsChanged = new BehaviorSubject<GetTransactionRequest>(this.request);
     this.onTransactionssLoadingChanged = new BehaviorSubject(false);
+    this.onTransactionsExcelFileChanged = new BehaviorSubject(null);
 
     this.onEditTransaction.subscribe(request => this.editTransaction(request));
     this.onDeleteTransaction.subscribe(request => this.deleteTransaction(request));
     this.onAddTransactions.subscribe(request => this.addTransactions(request));
+    this.onGetTransactionsExcel.subscribe(request => this.getTransactionsExcel(request));
 
     this.onGetTransactions.subscribe(request => {
       if (request != null) {
@@ -92,6 +98,20 @@ export class TransactionService {
       this._dialogService.showSnackBar("Successfully added!");
       return;
     }
+  }
+
+  public async getTransactionsExcel(request: GetTransactionExcelRequest): Promise<void> {
+    let response = await this._apiService.getTransactionsExcel(request);
+
+    if (response.size > 0) {
+      this._dialogService.showSnackBar("Successfully downloaded!");
+      this.onTransactionsExcelFileChanged.next(response);
+      return;
+    }
+
+    this._dialogService.showSnackBar("Something goes wrong! Try again.");
+    this.onTransactionsExcelFileChanged.next(null);
+    return;
   }
 
   private async getTransactions(): Promise<void> {

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Globalization;
@@ -83,6 +85,57 @@ namespace TestCase.Services
 
             //Return response
             return response;
+        }
+
+        public FileContentResult GetTransactionsExcel(Status? status = null, Type? type = null)
+        {
+            //Create query
+            var query = _db.Transactions
+                .AsNoTracking();
+
+            //Filter by status
+            if (status != null)
+                query = query.Where(v => v.Status == status);
+
+            //Filter by type
+            if (type != null)
+                query = query.Where(v => v.Type == type);
+
+            //Creating Excel file
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Transactions");
+                var currentRow = 1;
+
+                //Filling with headers
+                worksheet.Cell(currentRow, 1).Value = "Id";
+                worksheet.Cell(currentRow, 2).Value = "Status";
+                worksheet.Cell(currentRow, 3).Value = "Type";
+                worksheet.Cell(currentRow, 4).Value = "ClientName";
+                worksheet.Cell(currentRow, 5).Value = "Amount";
+
+                //Filling file with data
+                foreach (var item in query)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = item.Id;
+                    worksheet.Cell(currentRow, 2).Value = item.Status.ToString();
+                    worksheet.Cell(currentRow, 3).Value = item.Type.ToString();
+                    worksheet.Cell(currentRow, 4).Value = item.ClientName;
+                    worksheet.Cell(currentRow, 5).Value = item.Amount;
+                }
+
+                //Creating and returing file
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    FileContentResult file = new FileContentResult(stream.ToArray(),
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+                    file.FileDownloadName = "Transactions.xlsx";
+
+                    return file;
+                }
+            }
         }
 
         public async Task AddTransactions(TransactionsFileRequest file)
