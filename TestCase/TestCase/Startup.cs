@@ -99,6 +99,18 @@ namespace TestCase
                 app.UseHsts();
             }
 
+            //Angular build to www.root
+            app.Use(async (content, next) =>
+            {
+                await next();
+                if (content.Response.StatusCode == 404 && !Path.HasExtension(content.Request.Path.Value))
+                {
+                    content.Request.Path = "/index.html";
+                    await next();
+                }
+
+            });
+
             //Swagger setup
             app.UseSwagger();
             app.UseSwaggerUI(c =>
